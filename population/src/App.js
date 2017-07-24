@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { SplitButton, MenuItem, Row, Col, Navbar, Nav, NavItem 
+import { Navbar, Nav, NavItem 
 } from 'react-bootstrap';
 
 class App extends Component {
@@ -14,16 +14,18 @@ constructor(){
     return (
       <div className="App">
         { this.navbarInstance }
-        { }
-        
-        <Row>
-          <Col>
-            { this.buttons.map((item) => (this.buttonsInstance(item))) }
-          </Col>
-        </Row>
       </div>
     );
   }
+
+handleSelected(eventKey) {
+
+    fetch('http://api.population.io/1.0/population/1982/aged/18/')
+      .then(function(response) {
+        console.log(response.json());
+        console.log(eventKey);
+      })
+}
 
 navbarInstance = (
   <Navbar>
@@ -32,26 +34,12 @@ navbarInstance = (
         <a>População</a>
       </Navbar.Brand>
     </Navbar.Header>
-    <Nav>
+    <Nav onSelect={ this.handleSelected }>
       <NavItem eventKey={1} >Comparação</NavItem>
       <NavItem eventKey={2} >Estatística</NavItem>
     </Nav>
   </Navbar>
 );
-
-buttonsInstance (item) {
-this.buttonsView = 
-      <SplitButton bsStyle={item} title={item}>
-          <MenuItem eventKey="1">Action</ MenuItem>
-          <MenuItem eventKey="2">Another action</ MenuItem>
-          <MenuItem eventKey="3">Something else here</ MenuItem>
-          <MenuItem divider />
-          <MenuItem eventKey="4">Separated link</ MenuItem>
-      </SplitButton>
-return this.buttonsView;
-};
-
-
 
 }
 export default App;
