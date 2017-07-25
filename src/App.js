@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { 
   Navbar, Nav, NavItem, Row, Col, Grid, FormGroup,
-  FormControl, ControlLabel, Jumbotron, Modal, Button
+  FormControl, ControlLabel, Jumbotron
 } from 'react-bootstrap';
 import { Bar } from 'react-chartjs';
 
@@ -65,6 +65,7 @@ handleSelected(eventKey) {
 
 setYear(e){
   this.setState({year: e.target.value});
+  this.setState({hideChart: true});
   if ( this.state.age > 0) {
     var url = `http://api.population.io/1.0/population/${e.target.value}/aged/${this.state.age}/`
     var urlActual = `http://api.population.io/1.0/population/2017/aged/${this.state.age}/`
@@ -79,6 +80,7 @@ setYear(e){
 
 setAge(e){
   this.setState({age: e.target.value});
+  this.setState({hideChart: true});
   if (this.state.year > 0) {
     var url = `http://api.population.io/1.0/population/${this.state.year}/aged/${e.target.value}/`
     var urlActual = `http://api.population.io/1.0/population/2017/aged/${e.target.value}/`
