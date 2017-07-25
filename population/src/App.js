@@ -44,7 +44,6 @@ render() {
         { this.getCountryView() }
         { this.getBarChart() }
       </Grid>
-        { this.getModalInstance()}
     </div>
   );
 }
@@ -100,10 +99,9 @@ callApi(url, prop){
             this.setState({[prop] : json})
           }.bind(this))
         } else {
-          this.setState({showModal: true})
+          console.log(response.statusText)
         }
     }.bind(this)).catch(function(erro){
-      this.setState({showModal: true})
       console.log(erro)
     }.bind(this))
 }
@@ -239,33 +237,6 @@ showView() {
   } else if (this.state.showComparacao) {
     return this.getComparacaoInstance(this.state);
   }
-}
-
-// VIEWS: - Moda de erro
-getModalInstance(){
-  if (this.state.showModal) {
-    var modalInstance = (
-      <div className="static-modal">
-        <Modal.Dialog>
-          <Modal.Header>
-            <Modal.Title>Erro</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <p>Houve um erro ao realizar a requisição.</p>
-            <p>Confira novamente os parâmetros ou tente novamente mais tarde.</p>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button onSelect={this.close()}>Fechar</Button>
-          </Modal.Footer>
-        </Modal.Dialog>
-      </div>
-    );
-    return modalInstance;
-  }
-}
-
-close() {
-  this.setState({ showModal: false });
 }
 
 }
